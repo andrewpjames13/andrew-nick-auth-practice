@@ -41,11 +41,17 @@ class EventsController < ApplicationController
     @event.update(event_params)
     redirect_to events_path
   end
-  
+
   def destroy
-    @event = Event.find(params[:iid])
+    @event = Event.find(params[:id])
     @event.destroy(event_params)
     redirect_to events_path
+  end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:description, :location, :requires_id, :capacity, :date, :created_at, :updated_at)
   end
 
 end
